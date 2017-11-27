@@ -7,7 +7,7 @@
  * conditions stipulated in the agreement/contract under which the
  * program(s) have been supplied.
  *----------------------------------------------------------------------------*/
-package titi.Learning.ClassicDatastructure;
+package titi.Learning.ClassicDatastructure.Tree;
 
 /**
  * Java 语言实现: 红黑树
