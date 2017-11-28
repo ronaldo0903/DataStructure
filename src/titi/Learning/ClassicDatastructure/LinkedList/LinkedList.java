@@ -43,9 +43,10 @@ public class LinkedList<T> {
 
     public int length() {
         int length = 0;
-        while (head != null) {
+        ListNode<T> iterator = head;
+        while (iterator != null) {
             length++;
-            head = head.getNext();
+            iterator = iterator.getNext();
         }
         return length;
     }
@@ -53,6 +54,7 @@ public class LinkedList<T> {
     public void InsertAtPosition(ListNode<T> newNode, int position) throws Exception {
         if (head == null) {
             head = newNode;
+            return;
         }
         int size = length();
         if ((position > (size + 1)) || (position < 1)) {
@@ -65,7 +67,7 @@ public class LinkedList<T> {
             ListNode<T> preNode = head;
             int count = 1;
             while (count < (position - 1)) {
-                preNode = head.getNext();
+                preNode = preNode.getNext();
                 count++;
             }
             ListNode<T> curNode = preNode.getNext();
@@ -85,12 +87,12 @@ public class LinkedList<T> {
         } else {
             ListNode<T> preNode = head;
             int count = 1;
-            while (count < position) {
+            while (count < (position - 1)) {
                 preNode = preNode.getNext();
                 count++;
             }
             ListNode<T> curNode = preNode.getNext();
-            preNode.setNext(curNode.getNext());
+            preNode.setNext(curNode != null ? curNode.getNext() : null);
             curNode = null;
         }
     }
