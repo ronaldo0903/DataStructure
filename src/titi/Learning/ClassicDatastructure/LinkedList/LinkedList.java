@@ -152,6 +152,7 @@ public class LinkedList<T> {
         return null;
     }
 
+    //LeetCode 206
     public LinkedList<T> ReverseList() {
         if (head == null) {
             return null;
@@ -164,6 +165,112 @@ public class LinkedList<T> {
             head = next;
         }
         return new LinkedList<T>(temp);
+    }
+    
+    /*LeetCode 92
+    * Reverse a linked list from position m to n. Do it in-place and in one-pass.
+		For example:
+		Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+		
+		return 1->4->3->2->5->NULL.
+	
+		Note:
+		Given m, n satisfy the following condition:
+		1 ≤ m ≤ n ≤ length of list.
+    */
+    public LinkedList<T> ReverseBetween(int m, int n) {
+    	ListNode<T> iterator = head, preHead = null, targetHead = null, tail = null, postTail;
+    	for(int i=1; i<m; i++) {
+    		preHead = iterator;
+    		iterator = iterator.getNext();
+    	}
+    	targetHead = iterator;
+    	//Do reverse between position m and n
+    	for(int j=m; j<=n; j++) {
+    		tail = iterator;
+    		iterator = iterator.getNext();
+    	}
+    	postTail = iterator;
+    	//Reset iterator
+    	ListNode<T> temp = targetHead;
+    	iterator = targetHead.getNext();
+    	for(int k=m; k<n; k++) {
+    		ListNode<T> next = iterator.getNext();
+    		iterator.setNext(temp);
+    		temp = iterator;
+    		iterator = next;
+    	}
+    	if(preHead != null) preHead.setNext(temp);
+    	targetHead.setNext(postTail); 
+    	if(m > 1) return new LinkedList<T>(head);
+    	else return new LinkedList<T>(tail);
+    }
+    
+    //逐对逆置链表
+    public LinkedList<T> ReverseByPair()
+    {
+    	ListNode<T> newHead = null, iterator = head, next = null, nnext, preTail = null;
+    	while(iterator != null && iterator.getNext() != null) {
+    		next = iterator.getNext();
+    		if(preTail != null) preTail.setNext(next);
+    		nnext = next.getNext();
+    		next.setNext(iterator);
+    		iterator.setNext(nnext);
+    		if(newHead == null) newHead = next;
+    		preTail = iterator;
+    		iterator = nnext;    		
+    	}
+    	return new LinkedList(newHead);
+    }
+    /*以每连续K个结点为块，逐块逆置块内的结点，如果不足块内结点数不足K个，则不逆置该块
+     *例如:输入1 2 3 4 5 6 7 8 9 10,对于不同的K值，输出如下:
+     *K=2: 2 1 4 3 6 5 8 7 10 9
+     *K=3: 3 2 1 6 5 4 9 8 7 10
+     *K=4: 4 3 2 1 8 7 6 5 9 10    
+    */
+    public LinkedList<T> ReverseBlockOfKNodes(int K){
+    	ListNode<T> temp, next, cur = head, newHead, firstNodeInGroup = null, lastNodeInGroup = null;
+    	if(K==0 || K==1) return this;
+    	if(getKPlusOneThNode(K-1, cur) != null) {
+    		newHead = getKPlusOneThNode(K-1, cur);
+    	}
+    	else newHead = head;
+    	while(cur != null && hasKnodes(cur, K)) {
+    		 int i=0;
+    		 ListNode<T> preKthNode = cur;
+    		 temp = getKPlusOneThNode(K, cur);
+    		 while(i<K) {
+    			 next = cur.getNext();
+    			 cur.setNext(temp);
+    			 temp = cur;
+    			 cur = next;
+    			 i++;
+    		 }    		 
+    		 lastNodeInGroup = temp;
+    		 if(firstNodeInGroup != null) {
+    			 firstNodeInGroup.setNext(lastNodeInGroup);
+    		 }
+    		 firstNodeInGroup = preKthNode;
+    	}
+    	return new LinkedList(newHead);
+    }
+    
+    private ListNode<T> getKPlusOneThNode(int K, ListNode<T> node) {
+    	ListNode<T> KthNode = node;
+    	int i=0;
+    	if(node == null) return node;
+    	for(i=0; KthNode!=null && i<K; i++) {
+    		 KthNode = KthNode.getNext();
+    	}
+    	if(i == K && KthNode != null) return KthNode;
+    	else return null;
+    }
+    
+    private boolean hasKnodes(ListNode<T> node, int K) {
+    	int i=0;
+    	for(i=0;node!=null && i<K; i++, node = node.getNext());
+    	if(i==K) return true;
+    	else return false;
     }
 
     @Override

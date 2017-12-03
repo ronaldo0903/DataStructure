@@ -8,7 +8,6 @@ public class LinkedListTest {
     private LinkedList<Integer> testList, testReverseList, testLoopedList;
     private static Integer[] fromArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-
     @Test
     public void testToString() {
         testList = new LinkedList<Integer>(fromArray);
@@ -45,5 +44,53 @@ public class LinkedListTest {
         testList.DeleteAtPosition(7);
         testList.DeleteAtPosition(9);
         Assert.assertEquals(testList.toString(), "1->2->3->4->5->6->7->8->NULL");
+    }
+    
+    @Test
+    public void testReverseBetween() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseBetween(3, 6);
+    	Assert.assertEquals("1->2->6->5->4->3->7->8->9->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
+    }
+    
+    @Test
+    public void testReverseBetween2() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseBetween(1, 4);
+    	Assert.assertEquals("4->3->2->1->5->6->7->8->9->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
+    }
+    
+    @Test
+    public void testReverseBetween3() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseBetween(6, 9);
+    	Assert.assertEquals("1->2->3->4->5->9->8->7->6->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
+    }
+    
+    @Test
+    public void testReverseByPair() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseByPair();
+    	Assert.assertEquals("2->1->4->3->6->5->8->7->9->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
+    }
+    
+    @Test
+    public void testReverseByBlock() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseBlockOfKNodes(2);
+    	Assert.assertEquals("2->1->4->3->6->5->8->7->9->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
+    }
+    
+    @Test
+    public void testReverseByBlock2() {
+    	testList = new LinkedList<Integer>(fromArray);
+    	testReverseList = testList.ReverseBlockOfKNodes(3);
+    	//Assert.assertEquals("3->2->1->6->5->4->9->8->7->NULL", testReverseList.toString());
+    	System.out.println(testReverseList.toString());
     }
 }
