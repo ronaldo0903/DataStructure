@@ -31,6 +31,15 @@ public class SorterCompare {
 			case "MergeBU":
 				new MergeBUSorter().sort(a);
 				break;
+			case "Quick":
+				new QuickSorter().sort(a);
+				break;
+			case "Heap":
+				new HeapSorter().sort(a);
+				break;
+			case "Bubble":
+				new BubbleSorter().sort(a);
+				break;
 		}
 		timer.stop();
 		return timer.getTime();
