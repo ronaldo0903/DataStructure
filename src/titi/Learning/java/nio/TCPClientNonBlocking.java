@@ -37,7 +37,6 @@ public class TCPClientNonBlocking {
 	        int totalBytesRcvd = 0;   
 	        //每一次调用read（）方法接收到的字节数  
 	        int bytesRcvd;
-	        StringBuffer sb = new StringBuffer();
 	        //循环执行，直到接收到的字节数与发送的字符串的字节数相等  
 	        while (totalBytesRcvd < argument.length){  
 	            //如果用来向通道中写数据的缓冲区中还有剩余的字节，则继续将数据写入信道  
