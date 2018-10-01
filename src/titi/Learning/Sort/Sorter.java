@@ -1,7 +1,5 @@
 package titi.Learning.Sort;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 interface Sorter{
 
 	default boolean less(Comparable v, Comparable w) {
