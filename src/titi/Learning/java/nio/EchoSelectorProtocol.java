@@ -13,7 +13,8 @@ public class EchoSelectorProtocol implements TCPProtocol {
     }  
 
     //服务端信道已经准备好了接收新的客户端连接  
-    public void handleAccept(SelectionKey key) throws IOException {  
+    public void handleAccept(SelectionKey key) throws IOException {
+    	System.out.println("=== In handleAccept() ===");
         SocketChannel clntChan = ((ServerSocketChannel) key.channel()).accept();  
         clntChan.configureBlocking(false);  
         //将选择器注册到连接到的客户端信道，并指定该信道key值的属性为OP_READ，同时为该信道指定关联的附件  
@@ -21,7 +22,8 @@ public class EchoSelectorProtocol implements TCPProtocol {
     }  
 
     //客户端信道已经准备好了从信道中读取数据到缓冲区  
-    public void handleRead(SelectionKey key) throws IOException{  
+    public void handleRead(SelectionKey key) throws IOException{
+    	System.out.println("=== In handleRead() ===");
         SocketChannel clntChan = (SocketChannel) key.channel();  
         //获取该信道所关联的附件，这里为缓冲区  
         ByteBuffer buf = (ByteBuffer) key.attachment();  
@@ -36,7 +38,8 @@ public class EchoSelectorProtocol implements TCPProtocol {
     }  
 
     //客户端信道已经准备好了将数据从缓冲区写入信道  
-    public void handleWrite(SelectionKey key) throws IOException {  
+    public void handleWrite(SelectionKey key) throws IOException {
+    	System.out.println("=== In handleWrite() ===");	
     //获取与该信道关联的缓冲区，里面有之前读取到的数据  
     ByteBuffer buf = (ByteBuffer) key.attachment();  
     //重置缓冲区，准备将数据写入信道  

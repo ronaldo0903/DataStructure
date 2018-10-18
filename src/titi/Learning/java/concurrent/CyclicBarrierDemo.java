@@ -23,7 +23,7 @@ class Runner implements Runnable {
     public void run() {    
         try {    
             Thread.sleep(1000 * (new Random()).nextInt(8));    
-            System.out.println(name + " ×¼±¸OK.");    
+            System.out.println(name + " is Ready!");    
             barrier.await();    
         } catch (InterruptedException e) {    
             e.printStackTrace();    
