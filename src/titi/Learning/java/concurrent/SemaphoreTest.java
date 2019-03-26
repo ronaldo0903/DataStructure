@@ -6,27 +6,27 @@ import java.util.concurrent.Semaphore;
 
 public class SemaphoreTest{  
     public static void main(String[] args) {  
-    //²ÉÓÃĞÂÌØĞÔÀ´Æô¶¯ºÍ¹ÜÀíÏß³Ì¡ª¡ªÄÚ²¿Ê¹ÓÃÏß³Ì³Ø  
+    //é‡‡ç”¨æ–°ç‰¹æ€§æ¥å¯åŠ¨å’Œç®¡ç†çº¿ç¨‹â€”â€”å†…éƒ¨ä½¿ç”¨çº¿ç¨‹æ±   
     ExecutorService exec = Executors.newCachedThreadPool();  
-    //Ö»ÔÊĞí5¸öÏß³ÌÍ¬Ê±·ÃÎÊ  
+    //åªå…è®¸5ä¸ªçº¿ç¨‹åŒæ—¶è®¿é—®  
     final Semaphore semp = new Semaphore(5);  
-    //Ä£Äâ10¸ö¿Í»§¶Ë·ÃÎÊ  
+    //æ¨¡æ‹Ÿ10ä¸ªå®¢æˆ·ç«¯è®¿é—®  
     for (int index = 0; index < 10; index++){  
         final int num = index;  
         Runnable run = new Runnable() {  
             public void run() {  
                 try {  
-                    //»ñÈ¡Ğí¿É  
+                    //è·å–è®¸å¯  
                     semp.acquire();  
-                    System.out.println("Ïß³Ì" +   
-                        Thread.currentThread().getName() + "»ñµÃĞí¿É£º"  + num);  
-                    //Ä£ÄâºÄÊ±µÄÈÎÎñ  
+                    System.out.println("çº¿ç¨‹" +   
+                        Thread.currentThread().getName() + "è·å¾—è®¸å¯ï¼š"  + num);  
+                    //æ¨¡æ‹Ÿè€—æ—¶çš„ä»»åŠ¡  
                     for (int i = 0; i < 999999; i++) ;  
-                    //ÊÍ·ÅĞí¿É  
+                    //é‡Šæ”¾è®¸å¯  
                     semp.release();  
-                    System.out.println("Ïß³Ì" +   
-                        Thread.currentThread().getName() + "ÊÍ·ÅĞí¿É£º"  + num);  
-                    System.out.println("µ±Ç°ÔÊĞí½øÈëµÄÈÎÎñ¸öÊı£º" +  
+                    System.out.println("çº¿ç¨‹" +   
+                        Thread.currentThread().getName() + "é‡Šæ”¾è®¸å¯ï¼š"  + num);  
+                    System.out.println("å½“å‰å…è®¸è¿›å…¥çš„ä»»åŠ¡ä¸ªæ•°ï¼š" +  
                         semp.availablePermits());  
                 }catch(InterruptedException e){  
                     e.printStackTrace();  
@@ -35,7 +35,7 @@ public class SemaphoreTest{
         };  
           exec.execute(run);  
     }  
-    //¹Ø±ÕÏß³Ì³Ø  
+    //å…³é—­çº¿ç¨‹æ±   
     exec.shutdown();  
     }  
 } 

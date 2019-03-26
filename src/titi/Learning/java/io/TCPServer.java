@@ -6,15 +6,15 @@ import java.net.Socket;
 public class TCPServer {
 
 	public static void main(String[] args) throws Exception{  
-        //·şÎñ¶ËÔÚ20006¶Ë¿Ú¼àÌı¿Í»§¶ËÇëÇóµÄTCPÁ¬½Ó  
+        //æœåŠ¡ç«¯åœ¨20006ç«¯å£ç›‘å¬å®¢æˆ·ç«¯è¯·æ±‚çš„TCPè¿æ¥  
         ServerSocket server = new ServerSocket(20006);  
         Socket client = null;  
         boolean f = true;  
         while(f){  
-            //µÈ´ı¿Í»§¶ËµÄÁ¬½Ó£¬Èç¹ûÃ»ÓĞ»ñÈ¡Á¬½Ó  
+            //ç­‰å¾…å®¢æˆ·ç«¯çš„è¿æ¥ï¼Œå¦‚æœæ²¡æœ‰è·å–è¿æ¥  
             client = server.accept();  
-            System.out.println("Óë¿Í»§¶ËÁ¬½Ó³É¹¦£¡");  
-            //ÎªÃ¿¸ö¿Í»§¶ËÁ¬½Ó¿ªÆôÒ»¸öÏß³Ì  
+            System.out.println("ä¸å®¢æˆ·ç«¯è¿æ¥æˆåŠŸï¼");  
+            //ä¸ºæ¯ä¸ªå®¢æˆ·ç«¯è¿æ¥å¼€å¯ä¸€ä¸ªçº¿ç¨‹  
             //new Thread(new TCPServerThread(client)).start();
             new TCPServerThread(client).run();
         }  

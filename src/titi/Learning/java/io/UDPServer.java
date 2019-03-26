@@ -10,24 +10,24 @@ public class UDPServer {
 	public static void main(String[] args) throws IOException {
 		String str_send = "Hello UDPclient";  
         byte[] buf = new byte[1024];  
-        //·şÎñ¶ËÔÚ3000¶Ë¿Ú¼àÌı½ÓÊÕµ½µÄÊı¾İ  
+        //æœåŠ¡ç«¯åœ¨3000ç«¯å£ç›‘å¬æ¥æ”¶åˆ°çš„æ•°æ®  
         DatagramSocket ds = new DatagramSocket(3000);  
-        //½ÓÊÕ´Ó¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÊı¾İ  
+        //æ¥æ”¶ä»å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„æ•°æ®  
         DatagramPacket dp_receive = new DatagramPacket(buf, 1024);  
-        System.out.println("server is on£¬waiting for client to send data......");  
+        System.out.println("server is onï¼Œwaiting for client to send data......");  
         boolean f = true;  
         while(f){  
-            //·şÎñÆ÷¶Ë½ÓÊÕÀ´×Ô¿Í»§¶ËµÄÊı¾İ  
+            //æœåŠ¡å™¨ç«¯æ¥æ”¶æ¥è‡ªå®¢æˆ·ç«¯çš„æ•°æ®  
             ds.receive(dp_receive);  
-            System.out.println("server received data from client£º");  
+            System.out.println("server received data from clientï¼š");  
             String str_receive = new String(dp_receive.getData(),0,dp_receive.getLength()) +   
                     " from " + dp_receive.getAddress().getHostAddress() + ":" + dp_receive.getPort();  
             System.out.println(str_receive);  
-            //Êı¾İ·¢¶¯µ½¿Í»§¶ËµÄ3000¶Ë¿Ú  
+            //æ•°æ®å‘åŠ¨åˆ°å®¢æˆ·ç«¯çš„3000ç«¯å£  
             DatagramPacket dp_send= new DatagramPacket(str_send.getBytes(),str_send.length(),dp_receive.getAddress(),9000);  
             ds.send(dp_send);  
-            //ÓÉÓÚdp_receiveÔÚ½ÓÊÕÁËÊı¾İÖ®ºó£¬ÆäÄÚ²¿ÏûÏ¢³¤¶ÈÖµ»á±äÎªÊµ¼Ê½ÓÊÕµÄÏûÏ¢µÄ×Ö½ÚÊı£¬  
-            //ËùÒÔÕâÀïÒª½«dp_receiveµÄÄÚ²¿ÏûÏ¢³¤¶ÈÖØĞÂÖÃÎª1024  
+            //ç”±äºdp_receiveåœ¨æ¥æ”¶äº†æ•°æ®ä¹‹åï¼Œå…¶å†…éƒ¨æ¶ˆæ¯é•¿åº¦å€¼ä¼šå˜ä¸ºå®é™…æ¥æ”¶çš„æ¶ˆæ¯çš„å­—èŠ‚æ•°ï¼Œ  
+            //æ‰€ä»¥è¿™é‡Œè¦å°†dp_receiveçš„å†…éƒ¨æ¶ˆæ¯é•¿åº¦é‡æ–°ç½®ä¸º1024  
             dp_receive.setLength(1024);  
         }  
         ds.close();  

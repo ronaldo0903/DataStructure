@@ -11,21 +11,21 @@ public class NonInterruptableBuffer {
     public void write() {  
         synchronized (lock) {  
             long startTime = System.currentTimeMillis();  
-            System.out.println("¿ªÊ¼ÍùÕâ¸öbuffĞ´ÈëÊı¾İ¡­");  
-            for (;;)// Ä£ÄâÒª´¦ÀíºÜ³¤Ê±¼ä      
+            System.out.println("å¼€å§‹å¾€è¿™ä¸ªbuffå†™å…¥æ•°æ®â€¦");  
+            for (;;)// æ¨¡æ‹Ÿè¦å¤„ç†å¾ˆé•¿æ—¶é—´      
             {  
                 if (System.currentTimeMillis()  
                         - startTime > Integer.MAX_VALUE) {  
                     break;  
                 }  
             }  
-            System.out.println("ÖÕÓÚĞ´ÍêÁË");  
+            System.out.println("ç»ˆäºå†™å®Œäº†");  
         }  
     }  
 
     public void read() {  
         synchronized (lock) {  
-            System.out.println("´ÓÕâ¸öbuff¶ÁÊı¾İ");  
+            System.out.println("ä»è¿™ä¸ªbuffè¯»æ•°æ®");  
         }  
     }  
 
@@ -44,11 +44,11 @@ public class NonInterruptableBuffer {
             public void run() {  
                 long start = System.currentTimeMillis();  
                 for (;;) {  
-                    //µÈ5ÃëÖÓÈ¥ÖĞ¶Ï¶Á      
+                    //ç­‰5ç§’é’Ÿå»ä¸­æ–­è¯»      
                     if (System.currentTimeMillis()  
                             - start > 5000) {  
-                        System.out.println("²»µÈÁË£¬³¢ÊÔÖĞ¶Ï");  
-                        reader.interrupt();  //³¢ÊÔÖĞ¶Ï¶ÁÏß³Ì  
+                        System.out.println("ä¸ç­‰äº†ï¼Œå°è¯•ä¸­æ–­");  
+                        reader.interrupt();  //å°è¯•ä¸­æ–­è¯»çº¿ç¨‹  
                         break;  
                     }  
 
@@ -56,10 +56,10 @@ public class NonInterruptableBuffer {
 
             }  
         }).start();  
-        // ÎÒÃÇÆÚ´ı¡°¶Á¡±Õâ¸öÏß³ÌÄÜÍË³öµÈ´ıËø£¬¿ÉÊÇÊÂÓëÔ¸Î¥£¬Ò»µ©¶ÁÕâ¸öÏß³Ì·¢ÏÖ×Ô¼ºµÃ²»µ½Ëø£¬  
-        // ¾ÍÒ»Ö±¿ªÊ¼µÈ´ıÁË£¬¾ÍËãËüµÈËÀ£¬Ò²µÃ²»µ½Ëø£¬ÒòÎªĞ´Ïß³ÌÒª21ÒÚÃë²ÅÄÜÍê³É T_T £¬¼´Ê¹ÎÒÃÇÖĞ¶ÏËü£¬  
-        // Ëü¶¼²»À´ÏìÓ¦ÏÂ£¬¿´À´ÕæµÄÒªµÈËÀÁË¡£Õâ¸öÊ±ºò£¬ReentrantLock¸øÁËÒ»ÖÖ»úÖÆÈÃÎÒÃÇÀ´ÏìÓ¦ÖĞ¶Ï£¬  
-        // ÈÃ¡°¶Á¡±ÄÜÉìÄÜÇü£¬ÓÂ¸Ò·ÅÆú¶ÔÕâ¸öËøµÄµÈ´ı¡£ÎÒÃÇÀ´¸ÄĞ´BufferÕâ¸öÀà£¬¾Í½ĞBufferInterruptibly°É£¬¿ÉÖĞ¶Ï»º´æ¡£  
+        // æˆ‘ä»¬æœŸå¾…â€œè¯»â€è¿™ä¸ªçº¿ç¨‹èƒ½é€€å‡ºç­‰å¾…é”ï¼Œå¯æ˜¯äº‹ä¸æ„¿è¿ï¼Œä¸€æ—¦è¯»è¿™ä¸ªçº¿ç¨‹å‘ç°è‡ªå·±å¾—ä¸åˆ°é”ï¼Œ  
+        // å°±ä¸€ç›´å¼€å§‹ç­‰å¾…äº†ï¼Œå°±ç®—å®ƒç­‰æ­»ï¼Œä¹Ÿå¾—ä¸åˆ°é”ï¼Œå› ä¸ºå†™çº¿ç¨‹è¦21äº¿ç§’æ‰èƒ½å®Œæˆ T_T ï¼Œå³ä½¿æˆ‘ä»¬ä¸­æ–­å®ƒï¼Œ  
+        // å®ƒéƒ½ä¸æ¥å“åº”ä¸‹ï¼Œçœ‹æ¥çœŸçš„è¦ç­‰æ­»äº†ã€‚è¿™ä¸ªæ—¶å€™ï¼ŒReentrantLockç»™äº†ä¸€ç§æœºåˆ¶è®©æˆ‘ä»¬æ¥å“åº”ä¸­æ–­ï¼Œ  
+        // è®©â€œè¯»â€èƒ½ä¼¸èƒ½å±ˆï¼Œå‹‡æ•¢æ”¾å¼ƒå¯¹è¿™ä¸ªé”çš„ç­‰å¾…ã€‚æˆ‘ä»¬æ¥æ”¹å†™Bufferè¿™ä¸ªç±»ï¼Œå°±å«BufferInterruptiblyå§ï¼Œå¯ä¸­æ–­ç¼“å­˜ã€‚  
     } 
 
 }
@@ -88,9 +88,9 @@ class Reader extends Thread {
     @Override  
     public void run() {  
 
-        buff.read();//ÕâÀï¹À¼Æ»áÒ»Ö±×èÈû      
+        buff.read();//è¿™é‡Œä¼°è®¡ä¼šä¸€ç›´é˜»å¡      
 
-        System.out.println("¶Á½áÊø");  
+        System.out.println("è¯»ç»“æŸ");  
 
     }  
 }

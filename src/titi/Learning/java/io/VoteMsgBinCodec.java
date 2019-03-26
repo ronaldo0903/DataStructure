@@ -7,7 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /*
- * 使用如下的字节列格式编码和解码VoteMsg
+ * 浣跨敤濡備笅鐨勫瓧鑺傚垪鏍煎紡缂栫爜鍜岃В鐮乂oteMsg
  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
  |     Magic       |Flags|        ZERO           |

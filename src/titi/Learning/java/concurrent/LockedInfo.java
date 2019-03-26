@@ -4,9 +4,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class LockedInfo extends Info{ // ¶¨ÒåĞÅÏ¢Àà  
+class LockedInfo extends Info{ // å®šä¹‰ä¿¡æ¯ç±»  
     private Lock lock = new ReentrantLock();    
-    private Condition condition = lock.newCondition(); //²úÉúÒ»¸öCondition¶ÔÏó  
+    private Condition condition = lock.newCondition(); //äº§ç”Ÿä¸€ä¸ªConditionå¯¹è±¡  
     @Override
     public void set(String name,String content){  
         lock.lock();  
@@ -14,10 +14,10 @@ class LockedInfo extends Info{ // ¶¨ÒåĞÅÏ¢Àà
             while(!canProduce){  
                 condition.await() ;  
             }  
-            this.setName(name) ;    // ÉèÖÃÃû³Æ  
+            this.setName(name) ;    // è®¾ç½®åç§°  
             Thread.sleep(300) ;  
-            this.setContent(content) ;  // ÉèÖÃÄÚÈİ  
-            canProduce  = false ; // ¸Ä±ä±êÖ¾Î»£¬±íÊ¾¿ÉÒÔÈ¡×ß  
+            this.setContent(content) ;  // è®¾ç½®å†…å®¹  
+            canProduce  = false ; // æ”¹å˜æ ‡å¿—ä½ï¼Œè¡¨ç¤ºå¯ä»¥å–èµ°  
             condition.signal();  
         }catch(InterruptedException e){  
             e.printStackTrace() ;  
@@ -35,7 +35,7 @@ class LockedInfo extends Info{ // ¶¨ÒåĞÅÏ¢Àà
             Thread.sleep(300) ;  
             System.out.println(this.getName() +   
                 " --> " + this.getContent()) ;  
-            canProduce  = true ;  // ¸Ä±ä±êÖ¾Î»£¬±íÊ¾¿ÉÒÔÉú²ú  
+            canProduce  = true ;  // æ”¹å˜æ ‡å¿—ä½ï¼Œè¡¨ç¤ºå¯ä»¥ç”Ÿäº§  
             condition.signal();  
         }catch(InterruptedException e){  
             e.printStackTrace() ;  

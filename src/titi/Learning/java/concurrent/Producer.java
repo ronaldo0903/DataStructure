@@ -1,20 +1,20 @@
 package titi.Learning.java.concurrent;
 
-class Producer implements Runnable { // Í¨¹ıRunnableÊµÏÖ¶àÏß³Ì
-	private Info info = null; // ±£´æInfoÒıÓÃ
+class Producer implements Runnable { // é€šè¿‡Runnableå®ç°å¤šçº¿ç¨‹
+	private Info info = null; // ä¿å­˜Infoå¼•ç”¨
 
 	public Producer(Info info) {
 		this.info = info;
 	}
 
 	public void run() {
-		boolean flag = true; // ¶¨Òå±ê¼ÇÎ»
+		boolean flag = true; // å®šä¹‰æ ‡è®°ä½
 		for (int i = 0; i < 10; i++) {
 			if (flag) {
-				this.info.set("ĞÕÃû--1", "ÄÚÈİ--1"); // ÉèÖÃÃû³Æ
+				this.info.set("å§“å--1", "å†…å®¹--1"); // è®¾ç½®åç§°
 				flag = false;
 			} else {
-				this.info.set("ĞÕÃû--2", "ÄÚÈİ--2"); // ÉèÖÃÃû³Æ
+				this.info.set("å§“å--2", "å†…å®¹--2"); // è®¾ç½®åç§°
 				flag = true;
 			}
 		}

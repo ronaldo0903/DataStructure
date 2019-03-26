@@ -254,6 +254,65 @@ public class LinkedList<T> {
     	}
     	return new LinkedList(newHead);
     }
+
+    /*
+    LeetCode #83: Remove duplicates from Sorted List
+
+    Example Input: 1->1->2->3->4->4->5 Output: 1->2->3->4->5
+
+     */
+    public ListNode reserveDisctinctValues(ListNode head) {
+        ListNode outCur = head;
+        if(head == null || head.getNext() == null) return head;
+        ListNode innerPtr = outCur.getNext();
+        while(innerPtr != null) {
+            while(innerPtr != null && innerPtr.getData() == outCur.getData()) {
+                innerPtr = innerPtr.getNext();
+            }
+            outCur.setNext(innerPtr);
+            outCur = innerPtr;
+            if(innerPtr != null) innerPtr = innerPtr.getNext();
+
+        }
+        return head;
+    }
+    /*
+    LeetCode #82: Remove Duplicates from Sorted List II(Reserve only nodes with numOfSameValues =1)
+    Example Input: 1->1->2->3->4->4->5 Output: 2->3->5
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.getNext() == null) return head;
+        ListNode prev = head, cur = prev.getNext(), next = cur.getNext();
+        ListNode newHead = null, itrNode = null;
+        if(cur.getData() != prev.getData()) {
+            newHead = prev;
+            newHead.setNext(null);
+            itrNode = newHead;
+        }
+        while(next != null) {
+            if(cur.getData() != prev.getData() && cur.getData() != next.getData()) {
+                if(newHead == null) {
+                    newHead = cur;
+                    itrNode = newHead;
+                    itrNode.setNext(null);
+                }
+                else {
+                    if(itrNode != null) itrNode.setNext(cur);
+                    itrNode = cur;
+                    itrNode.setNext(null);
+                }
+            }
+            prev = cur;
+            cur = next;
+            next = next.getNext();
+        }
+        if(cur.getData() != prev.getData()) {
+            if(itrNode != null) itrNode.setNext(cur);
+            else if(newHead == null) newHead = cur;
+        }
+        return newHead;
+
+    }
     
     private ListNode<T> getKPlusOneThNode(int K, ListNode<T> node) {
     	ListNode<T> KthNode = node;

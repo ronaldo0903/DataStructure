@@ -1,7 +1,7 @@
 package titi.Learning.java.concurrent;
 
 /*
- * Ê¹ÓÃ2¸öÏß³Ì½»ÌæÍùÖÕ¶ËÊä³ö1->2->1->2->1->2...µÄĞòÁĞ
+ * ä½¿ç”¨2ä¸ªçº¿ç¨‹äº¤æ›¿å¾€ç»ˆç«¯è¾“å‡º1->2->1->2->1->2...çš„åºåˆ—
  */
 public class WaitAndNotifyExample implements Runnable {
 

@@ -15,13 +15,13 @@ public class EarlyNotify extends Object {
         print("in removeItem() - entering");  
 
         synchronized ( list ) {  
-            if ( list.isEmpty() ) {  //ÕâÀïÓÃifÓï¾ä»á·¢ÉúÎ£ÏÕ  
+            if ( list.isEmpty() ) {  //è¿™é‡Œç”¨ifè¯­å¥ä¼šå‘ç”Ÿå±é™©  
                 print("in removeItem() - about to wait()");  
                 list.wait();  
                 print("in removeItem() - done with wait()");  
             }  
 
-            //É¾³ıÔªËØ  
+            //åˆ é™¤å…ƒç´   
             String item = (String) list.remove(0);  
 
             print("in removeItem() - leaving");  
@@ -32,11 +32,11 @@ public class EarlyNotify extends Object {
     public void addItem(String item) {  
         print("in addItem() - entering");  
         synchronized ( list ) {  
-            //Ìí¼ÓÔªËØ  
+            //æ·»åŠ å…ƒç´   
             list.add(item);  
             print("in addItem() - just added: '" + item + "'");  
 
-            //Ìí¼Óºó£¬Í¨ÖªËùÓĞÏß³Ì  
+            //æ·»åŠ åï¼Œé€šçŸ¥æ‰€æœ‰çº¿ç¨‹  
             list.notifyAll();  
             print("in addItem() - just notified");
             try {
@@ -78,18 +78,18 @@ public class EarlyNotify extends Object {
             };  
 
         try {  
-            //Æô¶¯µÚÒ»¸öÉ¾³ıÔªËØµÄÏß³Ì  
+            //å¯åŠ¨ç¬¬ä¸€ä¸ªåˆ é™¤å…ƒç´ çš„çº¿ç¨‹  
             Thread threadA1 = new Thread(runA, "threadA1");  
             threadA1.start();  
 
             Thread.sleep(500);  
 
-            //Æô¶¯µÚ¶ş¸öÉ¾³ıÔªËØµÄÏß³Ì  
+            //å¯åŠ¨ç¬¬äºŒä¸ªåˆ é™¤å…ƒç´ çš„çº¿ç¨‹  
             Thread threadA2 = new Thread(runA, "threadA2");  
             threadA2.start();  
 
             Thread.sleep(500);  
-            //Æô¶¯Ôö¼ÓÔªËØµÄÏß³Ì  
+            //å¯åŠ¨å¢åŠ å…ƒç´ çš„çº¿ç¨‹  
             Thread threadB = new Thread(runB, "threadB");  
             threadB.start();  
 

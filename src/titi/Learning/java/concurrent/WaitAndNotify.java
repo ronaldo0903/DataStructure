@@ -3,7 +3,7 @@ package titi.Learning.java.concurrent;
 public class WaitAndNotify {
 
 	private Object proceedLock; 
-	//¸Ã±êÖ¾Î»ÓÃÀ´Ö¸Ê¾Ïß³ÌÊÇ·ñĞèÒªµÈ´ı  
+	//è¯¥æ ‡å¿—ä½ç”¨æ¥æŒ‡ç¤ºçº¿ç¨‹æ˜¯å¦éœ€è¦ç­‰å¾…  
     private boolean okToProceed;
 
     public WaitAndNotify() {  
@@ -17,7 +17,7 @@ public class WaitAndNotify {
 
         synchronized ( proceedLock ) {  
             print("in waitToProceed() - entered sync block");  
-            //whileÑ­»·ÅĞ¶Ï£¬ÕâÀï²»ÓÃifµÄÔ­ÒòÊÇÎªÁË·ÀÖ¹ÔçÆÚÍ¨Öª  
+            //whileå¾ªç¯åˆ¤æ–­ï¼Œè¿™é‡Œä¸ç”¨ifçš„åŸå› æ˜¯ä¸ºäº†é˜²æ­¢æ—©æœŸé€šçŸ¥  
             while ( okToProceed == false ) {  
                 print("in waitToProceed() - about to wait()");  
                 proceedLock.wait();  
@@ -35,7 +35,7 @@ public class WaitAndNotify {
 
         synchronized ( proceedLock ) {  
             print("in proceed() - entered sync block");  
-            //Í¨ÖªÖ®Ç°£¬½«ÆäÉèÖÃÎªtrue£¬ÕâÑù¼´Ê¹³öÏÖÍ¨ÖªÒÅÂ©µÄÇé¿ö£¬Ò²²»»áÊ¹Ïß³ÌÔÚwait³ö×èÈû  
+            //é€šçŸ¥ä¹‹å‰ï¼Œå°†å…¶è®¾ç½®ä¸ºtrueï¼Œè¿™æ ·å³ä½¿å‡ºç°é€šçŸ¥é—æ¼çš„æƒ…å†µï¼Œä¹Ÿä¸ä¼šä½¿çº¿ç¨‹åœ¨waitå‡ºé˜»å¡  
             okToProceed = true;  
             print("in proceed() - changed okToProceed to true");  
             proceedLock.notifyAll();  
@@ -58,9 +58,9 @@ public class WaitAndNotify {
         Runnable runA = new Runnable() {  
                 public void run() {  
                     try {  
-                        //ĞİÃß1000ms£¬´óÓÚrunBÖĞµÄ500ms£¬  
-                        //ÊÇÎªÁËºóµ÷ÓÃwaitToProceed£¬´Ó¶øÏÈnotifyAll£¬ºówait£¬  
-                        //´Ó¶øÔì³ÉÍ¨ÖªµÄÒÅÂ©  
+                        //ä¼‘çœ 1000msï¼Œå¤§äºrunBä¸­çš„500msï¼Œ  
+                        //æ˜¯ä¸ºäº†åè°ƒç”¨waitToProceedï¼Œä»è€Œå…ˆnotifyAllï¼Œåwaitï¼Œ  
+                        //ä»è€Œé€ æˆé€šçŸ¥çš„é—æ¼  
                         Thread.sleep(1000);  
                         mn.waitToProceed();  
                     } catch ( InterruptedException x ) {  
@@ -75,9 +75,9 @@ public class WaitAndNotify {
         Runnable runB = new Runnable() {  
                 public void run() {  
                     try {  
-                        //ĞİÃß500ms£¬Ğ¡ÓÚrunAÖĞµÄ1000ms£¬  
-                        //ÊÇÎªÁËÏÈµ÷ÓÃproceed£¬´Ó¶øÏÈnotifyAll£¬ºówait£¬  
-                        //´Ó¶øÔì³ÉÍ¨ÖªµÄÒÅÂ©  
+                        //ä¼‘çœ 500msï¼Œå°äºrunAä¸­çš„1000msï¼Œ  
+                        //æ˜¯ä¸ºäº†å…ˆè°ƒç”¨proceedï¼Œä»è€Œå…ˆnotifyAllï¼Œåwaitï¼Œ  
+                        //ä»è€Œé€ æˆé€šçŸ¥çš„é—æ¼  
                         Thread.sleep(500);  
                         mn.proceed();  
                     } catch ( InterruptedException x ) {  
@@ -93,7 +93,7 @@ public class WaitAndNotify {
             Thread.sleep(10000);  
         } catch ( InterruptedException x ) {}  
 
-        //ÊÔÍ¼´ò¶Ïwait×èÈû  
+        //è¯•å›¾æ‰“æ–­waité˜»å¡  
         print("about to invoke interrupt() on threadA");  
         threadA.interrupt();  
     }

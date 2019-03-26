@@ -11,16 +11,16 @@ public class TCPServerThread implements Runnable{
         this.client = client;  
     }
     
-  //´¦ÀíÍ¨ĞÅÏ¸½ÚµÄ¾²Ì¬·½·¨£¬ÕâÀïÖ÷ÒªÊÇ·½±ãÏß³Ì³Ø·şÎñÆ÷µÄµ÷ÓÃ  
+  //å¤„ç†é€šä¿¡ç»†èŠ‚çš„é™æ€æ–¹æ³•ï¼Œè¿™é‡Œä¸»è¦æ˜¯æ–¹ä¾¿çº¿ç¨‹æ± æœåŠ¡å™¨çš„è°ƒç”¨  
     public static void execute(Socket client){  
         try{  
-            //»ñÈ¡SocketµÄÊä³öÁ÷£¬ÓÃÀ´Ïò¿Í»§¶Ë·¢ËÍÊı¾İ    
+            //è·å–Socketçš„è¾“å‡ºæµï¼Œç”¨æ¥å‘å®¢æˆ·ç«¯å‘é€æ•°æ®    
             PrintStream out = new PrintStream(client.getOutputStream());  
-            //»ñÈ¡SocketµÄÊäÈëÁ÷£¬ÓÃÀ´½ÓÊÕ´Ó¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÊı¾İ  
+            //è·å–Socketçš„è¾“å…¥æµï¼Œç”¨æ¥æ¥æ”¶ä»å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„æ•°æ®  
             BufferedReader buf = new BufferedReader(new InputStreamReader(client.getInputStream()));  
             boolean flag =true;  
             while(flag){  
-                //½ÓÊÕ´Ó¿Í»§¶Ë·¢ËÍ¹ıÀ´µÄÊı¾İ    
+                //æ¥æ”¶ä»å®¢æˆ·ç«¯å‘é€è¿‡æ¥çš„æ•°æ®    
                 String str =  buf.readLine();  
                 if(str == null || "".equals(str)){
                 	out.println("Client sent empty string!");  
@@ -29,7 +29,7 @@ public class TCPServerThread implements Runnable{
                     if("bye".equals(str)){  
                         flag = false;  
                     }else{  
-                        //½«½ÓÊÕµ½µÄ×Ö·û´®Ç°Ãæ¼ÓÉÏecho£¬·¢ËÍµ½¶ÔÓ¦µÄ¿Í»§¶Ë    
+                        //å°†æ¥æ”¶åˆ°çš„å­—ç¬¦ä¸²å‰é¢åŠ ä¸Šechoï¼Œå‘é€åˆ°å¯¹åº”çš„å®¢æˆ·ç«¯    
                         out.println("echo:" + str);  
                     }  
                 }  

@@ -8,52 +8,52 @@ import java.net.InetAddress;
 
 public class UDPClient {
 
-	private static final int TIMEOUT = 5000;  //ÉèÖÃ½ÓÊÕÊı¾İµÄ³¬Ê±Ê±¼ä  
-    private static final int MAXNUM = 5;      //ÉèÖÃÖØ·¢Êı¾İµÄ×î¶à´ÎÊı  
+	private static final int TIMEOUT = 5000;  //è®¾ç½®æ¥æ”¶æ•°æ®çš„è¶…æ—¶æ—¶é—´  
+    private static final int MAXNUM = 5;      //è®¾ç½®é‡å‘æ•°æ®çš„æœ€å¤šæ¬¡æ•°  
     public static void main(String args[])throws IOException{  
         String str_send = "Hello UDPserver";  
         byte[] buf = new byte[1024];  
-        //¿Í»§¶ËÔÚ9000¶Ë¿Ú¼àÌı½ÓÊÕµ½µÄÊı¾İ  
+        //å®¢æˆ·ç«¯åœ¨9000ç«¯å£ç›‘å¬æ¥æ”¶åˆ°çš„æ•°æ®  
         DatagramSocket ds = new DatagramSocket(9000);  
         InetAddress loc = InetAddress.getLocalHost();  
-        //¶¨ÒåÓÃÀ´·¢ËÍÊı¾İµÄDatagramPacketÊµÀı  
+        //å®šä¹‰ç”¨æ¥å‘é€æ•°æ®çš„DatagramPacketå®ä¾‹  
         DatagramPacket dp_send= new DatagramPacket(str_send.getBytes(),str_send.length(),loc,3000);  
-        //¶¨ÒåÓÃÀ´½ÓÊÕÊı¾İµÄDatagramPacketÊµÀı  
+        //å®šä¹‰ç”¨æ¥æ¥æ”¶æ•°æ®çš„DatagramPacketå®ä¾‹  
         DatagramPacket dp_receive = new DatagramPacket(buf, 1024);  
-        //Êı¾İ·¢Ïò±¾µØ3000¶Ë¿Ú  
-        ds.setSoTimeout(TIMEOUT);              //ÉèÖÃ½ÓÊÕÊı¾İÊ±×èÈûµÄ×î³¤Ê±¼ä  
-        int tries = 0;                         //ÖØ·¢Êı¾İµÄ´ÎÊı  
-        boolean receivedResponse = false;     //ÊÇ·ñ½ÓÊÕµ½Êı¾İµÄ±êÖ¾Î»  
-        //Ö±µ½½ÓÊÕµ½Êı¾İ£¬»òÕßÖØ·¢´ÎÊı´ïµ½Ô¤¶¨Öµ£¬ÔòÍË³öÑ­»·  
+        //æ•°æ®å‘å‘æœ¬åœ°3000ç«¯å£  
+        ds.setSoTimeout(TIMEOUT);              //è®¾ç½®æ¥æ”¶æ•°æ®æ—¶é˜»å¡çš„æœ€é•¿æ—¶é—´  
+        int tries = 0;                         //é‡å‘æ•°æ®çš„æ¬¡æ•°  
+        boolean receivedResponse = false;     //æ˜¯å¦æ¥æ”¶åˆ°æ•°æ®çš„æ ‡å¿—ä½  
+        //ç›´åˆ°æ¥æ”¶åˆ°æ•°æ®ï¼Œæˆ–è€…é‡å‘æ¬¡æ•°è¾¾åˆ°é¢„å®šå€¼ï¼Œåˆ™é€€å‡ºå¾ªç¯  
         while(!receivedResponse && tries<MAXNUM){  
-            //·¢ËÍÊı¾İ  
+            //å‘é€æ•°æ®  
             ds.send(dp_send);  
             try{  
-                //½ÓÊÕ´Ó·şÎñ¶Ë·¢ËÍ»ØÀ´µÄÊı¾İ  
+                //æ¥æ”¶ä»æœåŠ¡ç«¯å‘é€å›æ¥çš„æ•°æ®  
                 ds.receive(dp_receive);  
-                //Èç¹û½ÓÊÕµ½µÄÊı¾İ²»ÊÇÀ´×ÔÄ¿±êµØÖ·£¬ÔòÅ×³öÒì³£  
+                //å¦‚æœæ¥æ”¶åˆ°çš„æ•°æ®ä¸æ˜¯æ¥è‡ªç›®æ ‡åœ°å€ï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸  
                 if(!dp_receive.getAddress().equals(loc)){  
                     throw new IOException("Received packet from an umknown source");  
                 }  
-                //Èç¹û½ÓÊÕµ½Êı¾İ¡£Ôò½«receivedResponse±êÖ¾Î»¸ÄÎªtrue£¬´Ó¶øÍË³öÑ­»·  
+                //å¦‚æœæ¥æ”¶åˆ°æ•°æ®ã€‚åˆ™å°†receivedResponseæ ‡å¿—ä½æ”¹ä¸ºtrueï¼Œä»è€Œé€€å‡ºå¾ªç¯  
                 receivedResponse = true;  
             }catch(InterruptedIOException e){  
-                //Èç¹û½ÓÊÕÊı¾İÊ±×èÈû³¬Ê±£¬ÖØ·¢²¢¼õÉÙÒ»´ÎÖØ·¢µÄ´ÎÊı  
+                //å¦‚æœæ¥æ”¶æ•°æ®æ—¶é˜»å¡è¶…æ—¶ï¼Œé‡å‘å¹¶å‡å°‘ä¸€æ¬¡é‡å‘çš„æ¬¡æ•°  
                 tries += 1;  
                 System.out.println("Time out," + (MAXNUM - tries) + " more tries..." );  
             }  
         }  
         if(receivedResponse){  
-            //Èç¹ûÊÕµ½Êı¾İ£¬Ôò´òÓ¡³öÀ´  
-            System.out.println("client received data from server£º");  
+            //å¦‚æœæ”¶åˆ°æ•°æ®ï¼Œåˆ™æ‰“å°å‡ºæ¥  
+            System.out.println("client received data from serverï¼š");  
             String str_receive = new String(dp_receive.getData(),0,dp_receive.getLength()) +   
                     " from " + dp_receive.getAddress().getHostAddress() + ":" + dp_receive.getPort();  
             System.out.println(str_receive);  
-            //ÓÉÓÚdp_receiveÔÚ½ÓÊÕÁËÊı¾İÖ®ºó£¬ÆäÄÚ²¿ÏûÏ¢³¤¶ÈÖµ»á±äÎªÊµ¼Ê½ÓÊÕµÄÏûÏ¢µÄ×Ö½ÚÊı£¬  
-            //ËùÒÔÕâÀïÒª½«dp_receiveµÄÄÚ²¿ÏûÏ¢³¤¶ÈÖØĞÂÖÃÎª1024  
+            //ç”±äºdp_receiveåœ¨æ¥æ”¶äº†æ•°æ®ä¹‹åï¼Œå…¶å†…éƒ¨æ¶ˆæ¯é•¿åº¦å€¼ä¼šå˜ä¸ºå®é™…æ¥æ”¶çš„æ¶ˆæ¯çš„å­—èŠ‚æ•°ï¼Œ  
+            //æ‰€ä»¥è¿™é‡Œè¦å°†dp_receiveçš„å†…éƒ¨æ¶ˆæ¯é•¿åº¦é‡æ–°ç½®ä¸º1024  
             dp_receive.setLength(1024);     
         }else{  
-            //Èç¹ûÖØ·¢MAXNUM´ÎÊı¾İºó£¬ÈÔÎ´»ñµÃ·şÎñÆ÷·¢ËÍ»ØÀ´µÄÊı¾İ£¬Ôò´òÓ¡ÈçÏÂĞÅÏ¢  
+            //å¦‚æœé‡å‘MAXNUMæ¬¡æ•°æ®åï¼Œä»æœªè·å¾—æœåŠ¡å™¨å‘é€å›æ¥çš„æ•°æ®ï¼Œåˆ™æ‰“å°å¦‚ä¸‹ä¿¡æ¯  
             System.out.println("No response -- give up.");  
         }  
         ds.close();  

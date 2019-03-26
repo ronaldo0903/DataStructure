@@ -3,11 +3,11 @@ package titi.Learning.java.concurrent;
 
 public class ProducerAndConsumerDemoUsingLock{  
     public static void main(String args[]){  
-        LockedInfo info = new LockedInfo(); // ÊµÀı»¯Info¶ÔÏó  
-        Producer pro = new Producer(info) ; // Éú²úÕß  
-        Consumer con = new Consumer(info) ; // Ïû·ÑÕß  
+        LockedInfo info = new LockedInfo(); // å®ä¾‹åŒ–Infoå¯¹è±¡  
+        Producer pro = new Producer(info) ; // ç”Ÿäº§è€…  
+        Consumer con = new Consumer(info) ; // æ¶ˆè´¹è€…  
         new Thread(pro).start() ;  
-        //Æô¶¯ÁËÉú²úÕßÏß³Ìºó£¬ÔÙÆô¶¯Ïû·ÑÕßÏß³Ì  
+        //å¯åŠ¨äº†ç”Ÿäº§è€…çº¿ç¨‹åï¼Œå†å¯åŠ¨æ¶ˆè´¹è€…çº¿ç¨‹  
         try{  
             Thread.sleep(500) ;  
         }catch(InterruptedException e){  

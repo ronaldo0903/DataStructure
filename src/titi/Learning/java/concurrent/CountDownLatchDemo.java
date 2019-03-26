@@ -8,14 +8,14 @@ private static final int N = 10;
     
     public static void main(String[] args) throws InterruptedException {    
         CountDownLatch doneSignal = new CountDownLatch(N);    
-        CountDownLatch startSignal = new CountDownLatch(1);//ø™ º÷¥–––≈∫≈    
+        CountDownLatch startSignal = new CountDownLatch(1);//ÂºÄÂßãÊâßË°å‰ø°Âè∑    
     
         for (int i = 1; i <= N; i++) {    
-            new Thread(new Worker(i, doneSignal, startSignal)).start();//œﬂ≥Ã∆Ù∂Ø¡À    
+            new Thread(new Worker(i, doneSignal, startSignal)).start();//Á∫øÁ®ãÂêØÂä®‰∫Ü    
         }    
         System.out.println("begin------------");    
-        startSignal.countDown();//ø™ º÷¥––¿≤    
-        doneSignal.await();//µ»¥˝À˘”–µƒœﬂ≥Ã÷¥––ÕÍ±œ    
+        startSignal.countDown();//ÂºÄÂßãÊâßË°åÂï¶    
+        doneSignal.await();//Á≠âÂæÖÊâÄÊúâÁöÑÁ∫øÁ®ãÊâßË°åÂÆåÊØï    
         System.out.println("Ok");    
     
     }    
@@ -34,7 +34,7 @@ private static final int N = 10;
     
         public void run() {    
             try {    
-                startSignal.await(); //µ»¥˝ø™ º÷¥–––≈∫≈µƒ∑¢≤º    
+                startSignal.await(); //Á≠âÂæÖÂºÄÂßãÊâßË°å‰ø°Âè∑ÁöÑÂèëÂ∏É    
                 beginIndex = (beginIndex - 1) * 10 + 1;    
                 for (int i = beginIndex; i <= beginIndex + 10; i++) {    
                     System.out.println("In Thread " + Thread.currentThread().getName() + ",value printed:" +i);    

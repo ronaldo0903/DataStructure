@@ -8,7 +8,7 @@ public class LinkedListTest {
     private LinkedList<Integer> testList, testReverseList, testLoopedList;
     private static Integer[] fromArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-    @Test
+
     public void testToString() {
         testList = new LinkedList<Integer>(fromArray);
         Assert.assertEquals(testList.toString(), "1->2->3->4->5->6->7->8->9->NULL");

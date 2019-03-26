@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.channels.SelectionKey;
 
 public interface TCPProtocol {
-	//accept I/O形式  
+	//accept I/O褰㈠紡  
     void handleAccept(SelectionKey key) throws IOException;  
-    //read I/O形式  
+    //read I/O褰㈠紡  
     void handleRead(SelectionKey key) throws IOException;  
-    //write I/O形式  
+    //write I/O褰㈠紡  
     void handleWrite(SelectionKey key) throws IOException; 
 }

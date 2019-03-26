@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
- * »ùÊıÅÅĞò(10½øÖÆ)
+ * åŸºæ•°æ’åº(10è¿›åˆ¶)
  */
 public class RadixSorter {
 	private static final int[] NUMBERS = {49, 38, 65, 97, 76, 13, 27, 78, 34, 12, 64, 5, 4, 62, 99, 98, 54, 56, 17, 18, 23, 34, 15, 35, 25, 53, 51};
 	public static void radixSort(int[] array) {
-		//ÏÈÈ·¶¨ÅÅĞòµÄÌËÊı£¬ÎªÊı×éÖĞ×î´óÔªËØµÄÎ»Êı
+		//å…ˆç¡®å®šæ’åºçš„è¶Ÿæ•°ï¼Œä¸ºæ•°ç»„ä¸­æœ€å¤§å…ƒç´ çš„ä½æ•°
 		int max = array[0];
 		for(int i=1; i<array.length; i++) {
 			if(max < array[i]) max = array[i];			
@@ -19,19 +19,19 @@ public class RadixSorter {
 			max /= 10;
 			rounds ++;
 		}
-		//½¨Á¢10¸ö¶ÓÁĞ£¬ÆäÖĞ¶ÓÁĞiÀï´æ·Åµ±Ç°´¦ÀíµÄÊı×ÖÎ»ÎªiµÄÊı×éÔªËØ
+		//å»ºç«‹10ä¸ªé˜Ÿåˆ—ï¼Œå…¶ä¸­é˜Ÿåˆ—ié‡Œå­˜æ”¾å½“å‰å¤„ç†çš„æ•°å­—ä½ä¸ºiçš„æ•°ç»„å…ƒç´ 
 		ArrayList<ArrayList<Integer>> queue = new ArrayList<>();
 		for(int i=0; i<10; i++) {
 			queue.add(new ArrayList<>());
 		}
-		//½øĞĞrounds´ÎÊı¾İ·ÖÅäºÍÊÕ¼¯
+		//è¿›è¡Œroundsæ¬¡æ•°æ®åˆ†é…å’Œæ”¶é›†
 		for(int i=0; i<rounds; i++) {
 			for(int element : array) {
-				//»ñÈ¡elementµÄµÚ(i+1)Î»Êı£¬¸öÎ»ÎªµÚÒ»Î»£¬Ê®Î»ÎªµÚ¶şÎ»£¬...
+				//è·å–elementçš„ç¬¬(i+1)ä½æ•°ï¼Œä¸ªä½ä¸ºç¬¬ä¸€ä½ï¼Œåä½ä¸ºç¬¬äºŒä½ï¼Œ...
 				int curDigit = (int) (element % Math.pow(10, i+1) / Math.pow(10, i));
 				queue.get(curDigit).add(element);				
 			}
-			//¸ù¾İµ±Ç°ÂÖµÄ10¸ö¶ÓÁĞÖØĞÂÅÅĞòÔ­Êı×é
+			//æ ¹æ®å½“å‰è½®çš„10ä¸ªé˜Ÿåˆ—é‡æ–°æ’åºåŸæ•°ç»„
 			int count = 0;
 			for(int k=0; k<10; k++) {
 				while(queue.get(k).size() > 0) {
@@ -39,11 +39,11 @@ public class RadixSorter {
 					queue.get(k).remove(0);
 				}
 			}
-			System.out.printf("µÚ%dÂÖÅÅĞò½áÊøºóµÄÊı×éÔªËØ:%s \n", i+1, Arrays.toString(array));
+			System.out.printf("ç¬¬%dè½®æ’åºç»“æŸåçš„æ•°ç»„å…ƒç´ :%s \n", i+1, Arrays.toString(array));
 		}
 	}
 	public static void main(String[] args) {
-		System.out.printf("ÅÅĞòÇ°µÄÊı×éÔªËØ:%s \n", Arrays.toString(NUMBERS));
+		System.out.printf("æ’åºå‰çš„æ•°ç»„å…ƒç´ :%s \n", Arrays.toString(NUMBERS));
 		radixSort(NUMBERS);
 	}
 }

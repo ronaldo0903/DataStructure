@@ -2,7 +2,7 @@ package titi.Learning.java.reference;
 
 class VeryBig {
 	public String id;
-	// Õ¼ÓÃ¿Õ¼ä,ÈÃÏß³Ì½øĞĞ»ØÊÕ
+	// å ç”¨ç©ºé—´,è®©çº¿ç¨‹è¿›è¡Œå›æ”¶
 	byte[] b = new byte[2 * 1024];
  
 	public VeryBig(String id) {

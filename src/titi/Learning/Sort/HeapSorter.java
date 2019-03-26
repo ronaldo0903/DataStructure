@@ -6,13 +6,13 @@ public class HeapSorter implements Sorter {
 	public void sort(Comparable[] a) {
 		int N = a.length;
 		/*
-		 * 建立最大堆
+		 * 寤虹珛鏈�澶у爢
 		*/		 
 		int bIndex = (N -2) >> 1;
 		for(int i=bIndex; i>=0; i--) {
 			heapify(i,N-1,a);
 		}
-		//利用最大堆实现排序
+		//鍒╃敤鏈�澶у爢瀹炵幇鎺掑簭
 		for(int i=N-1; i>0; i--) {
 			exchange(a, 0, i);
 			heapify(0, i-1, a);

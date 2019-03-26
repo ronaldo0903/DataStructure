@@ -1,9 +1,9 @@
 package titi.Learning.java.concurrent;
 
-class Info { // ¶¨ÒåĞÅÏ¢Àà
-	private String name = "name";// ¶¨ÒånameÊôĞÔ£¬ÎªÁËÓëÏÂÃæsetµÄnameÊôĞÔÇø±ğ¿ª
-	private String content = "content";// ¶¨ÒåcontentÊôĞÔ£¬ÎªÁËÓëÏÂÃæsetµÄcontentÊôĞÔÇø±ğ¿ª
-	protected boolean canProduce = true; // ÉèÖÃ±êÖ¾Î»,³õÊ¼Ê±ÏÈÉú²ú
+class Info { // å®šä¹‰ä¿¡æ¯ç±»
+	private String name = "name";// å®šä¹‰nameå±æ€§ï¼Œä¸ºäº†ä¸ä¸‹é¢setçš„nameå±æ€§åŒºåˆ«å¼€
+	private String content = "content";// å®šä¹‰contentå±æ€§ï¼Œä¸ºäº†ä¸ä¸‹é¢setçš„contentå±æ€§åŒºåˆ«å¼€
+	protected boolean canProduce = true; // è®¾ç½®æ ‡å¿—ä½,åˆå§‹æ—¶å…ˆç”Ÿäº§
 
 	public synchronized void set(String name, String content) {
 		while (!canProduce) {
@@ -13,14 +13,14 @@ class Info { // ¶¨ÒåĞÅÏ¢Àà
 				e.printStackTrace();
 			}
 		}
-		this.setName(name); // ÉèÖÃÃû³Æ
+		this.setName(name); // è®¾ç½®åç§°
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		this.setContent(content); // ÉèÖÃÄÚÈİ
-		canProduce = false; // ¸Ä±ä±êÖ¾Î»£¬±íÊ¾¿ÉÒÔÈ¡×ß
+		this.setContent(content); // è®¾ç½®å†…å®¹
+		canProduce = false; // æ”¹å˜æ ‡å¿—ä½ï¼Œè¡¨ç¤ºå¯ä»¥å–èµ°
 		super.notify();
 	}
 
@@ -38,7 +38,7 @@ class Info { // ¶¨ÒåĞÅÏ¢Àà
 			e.printStackTrace();
 		}
 		System.out.println(this.getName() + " --> " + this.getContent());
-		canProduce = true; // ¸Ä±ä±êÖ¾Î»£¬±íÊ¾¿ÉÒÔÉú²ú
+		canProduce = true; // æ”¹å˜æ ‡å¿—ä½ï¼Œè¡¨ç¤ºå¯ä»¥ç”Ÿäº§
 		super.notify();
 	}
 

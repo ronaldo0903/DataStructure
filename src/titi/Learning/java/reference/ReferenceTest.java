@@ -22,16 +22,16 @@ public class ReferenceTest {
     public static void main(String[] args) {
         int size = 10;
         /*
-         * SoftReference:ÔÚÄÚ´æ²»×ãÊ±²Å»á»ØÊÕÕâÑùÈíÒıÓÃ¶ÔÏó
+         * SoftReference:åœ¨å†…å­˜ä¸è¶³æ—¶æ‰ä¼šå›æ”¶è¿™æ ·è½¯å¼•ç”¨å¯¹è±¡
          * */
         LinkedList<SoftReference<VeryBig>> sa = new  LinkedList<SoftReference<VeryBig>>();
         for(int i=0;i<size;i++){
             sa.add(new SoftReference(new VeryBig("Soft "+i),rq));
             System.out.println("Just created[Soft]: "+sa.getLast().get());
-            checkQueue();//Ò»Ö±Îª¿Õ
+            checkQueue();//ä¸€ç›´ä¸ºç©º
         }
         /*
-         * WeakReference:ÔÚGC·¢ÏÖÖ»¾ßÓĞÈõÒıÓÃµÄ¶ÔÏó»áÁ¢¼´¶ÔÆä»á»ØÊÕ
+         * WeakReference:åœ¨GCå‘ç°åªå…·æœ‰å¼±å¼•ç”¨çš„å¯¹è±¡ä¼šç«‹å³å¯¹å…¶ä¼šå›æ”¶
          * */
         LinkedList<VeryBigWeakReference> wa = new  LinkedList<VeryBigWeakReference>();
         for(int i=0;i<size;i++){
@@ -43,7 +43,7 @@ public class ReferenceTest {
         SoftReference<VeryBig> sf = new SoftReference<VeryBig>(new VeryBig("Soft "));
         VeryBigWeakReference wf = new VeryBigWeakReference(new VeryBig("Weak"), rq);
 
-        System.gc();//ÏÔÊ¾µÄ½øĞĞÀ¬»ø»ØÊÕ£¬Ê²Ã´Ê±ºòÖ´ĞĞ¾ÍÓÉJVM¾ö¶¨
+        System.gc();//æ˜¾ç¤ºçš„è¿›è¡Œåƒåœ¾å›æ”¶ï¼Œä»€ä¹ˆæ—¶å€™æ‰§è¡Œå°±ç”±JVMå†³å®š
 
         LinkedList<PhantomReference<VeryBig>> pa = new  LinkedList<PhantomReference<VeryBig>>();
         for(int i=0;i<size;i++){

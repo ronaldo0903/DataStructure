@@ -10,24 +10,24 @@ public class InterruptableBuffer {
         lock.lock();  
         try {  
             long startTime = System.currentTimeMillis();  
-            System.out.println("¿ªÊ¼ÍùÕâ¸öbuffĞ´ÈëÊı¾İ¡­");  
-            for (;;)// Ä£ÄâÒª´¦ÀíºÜ³¤Ê±¼ä      
+            System.out.println("å¼€å§‹å¾€è¿™ä¸ªbuffå†™å…¥æ•°æ®â€¦");  
+            for (;;)// æ¨¡æ‹Ÿè¦å¤„ç†å¾ˆé•¿æ—¶é—´      
             {  
                 if (System.currentTimeMillis()  
                         - startTime > Integer.MAX_VALUE) {  
                     break;  
                 }  
             }  
-            System.out.println("ÖÕÓÚĞ´ÍêÁË");  
+            System.out.println("ç»ˆäºå†™å®Œäº†");  
         } finally {  
             lock.unlock();  
         }  
     }  
 
     public void read() throws InterruptedException {  
-        lock.lockInterruptibly();// ×¢ÒâÕâÀï£¬¿ÉÒÔÏìÓ¦ÖĞ¶Ï      
+        lock.lockInterruptibly();// æ³¨æ„è¿™é‡Œï¼Œå¯ä»¥å“åº”ä¸­æ–­      
         try {  
-            System.out.println("´ÓÕâ¸öbuff¶ÁÊı¾İ");  
+            System.out.println("ä»è¿™ä¸ªbuffè¯»æ•°æ®");  
         } finally {  
             lock.unlock();  
         }  
@@ -50,8 +50,8 @@ public class InterruptableBuffer {
                 for (;;) {  
                     if (System.currentTimeMillis()  
                             - start > 5000) {  
-                        System.out.println("²»µÈÁË£¬³¢ÊÔÖĞ¶Ï");  
-                        reader.interrupt();  //´Ë´¦ÖĞ¶Ï¶Á²Ù×÷  
+                        System.out.println("ä¸ç­‰äº†ï¼Œå°è¯•ä¸­æ–­");  
+                        reader.interrupt();  //æ­¤å¤„ä¸­æ–­è¯»æ“ä½œ  
                         break;  
                     }  
                 }  
@@ -73,12 +73,12 @@ class Reader2 extends Thread {
     public void run() {  
 
         try {  
-            buff.read();//¿ÉÒÔÊÕµ½ÖĞ¶ÏµÄÒì³££¬´Ó¶øÓĞĞ§ÍË³ö      
+            buff.read();//å¯ä»¥æ”¶åˆ°ä¸­æ–­çš„å¼‚å¸¸ï¼Œä»è€Œæœ‰æ•ˆé€€å‡º      
         } catch (InterruptedException e) {  
-            System.out.println("ÎÒ²»¶ÁÁË");  
+            System.out.println("æˆ‘ä¸è¯»äº†");  
         }  
 
-        System.out.println("¶Á½áÊø");  
+        System.out.println("è¯»ç»“æŸ");  
 
     }  
 }  
