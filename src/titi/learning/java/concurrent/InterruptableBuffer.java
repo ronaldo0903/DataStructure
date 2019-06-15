@@ -36,8 +36,8 @@ public class InterruptableBuffer {
     public static void main(String args[]) {  
         InterruptableBuffer buff = new InterruptableBuffer();  
 
-        final Writer2 writer = new Writer2(buff);  
-        final Reader2 reader = new Reader2(buff);  
+        final Writer2 writer = new Writer2(buff, "Writer");
+        final Reader2 reader = new Reader2(buff, "Reader");
 
         writer.start();  
         reader.start();  
@@ -56,7 +56,7 @@ public class InterruptableBuffer {
                     }  
                 }  
             }  
-        }).start();  
+        }, "Interuptor").start();
 
     }  
 }  
@@ -65,13 +65,13 @@ class Reader2 extends Thread {
 
     private InterruptableBuffer buff;  
 
-    public Reader2(InterruptableBuffer buff) {  
-        this.buff = buff;  
+    public Reader2(InterruptableBuffer buff, String name) {
+        super(name);
+        this.buff = buff;
     }  
 
     @Override  
-    public void run() {  
-
+    public void run() {
         try {  
             buff.read();//可以收到中断的异常，从而有效退出      
         } catch (InterruptedException e) {  
@@ -87,8 +87,9 @@ class Writer2 extends Thread {
 
     private InterruptableBuffer buff;  
 
-    public Writer2(InterruptableBuffer buff) {  
-        this.buff = buff;  
+    public Writer2(InterruptableBuffer buff, String name) {
+        super(name);
+        this.buff = buff;
     }  
 
     @Override  

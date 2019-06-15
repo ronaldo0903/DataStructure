@@ -3,7 +3,7 @@ package titi.learning.java.concurrent;
 class Info { // 定义信息类
 	private String name = "name";// 定义name属性，为了与下面set的name属性区别开
 	private String content = "content";// 定义content属性，为了与下面set的content属性区别开
-	protected boolean canProduce = true; // 设置标志位,初始时先生产
+	protected boolean canProduce = false; // 设置标志位,初始时先生产
 
 	public synchronized void set(String name, String content) {
 		while (!canProduce) {
@@ -32,11 +32,11 @@ class Info { // 定义信息类
 				e.printStackTrace();
 			}
 		}
-		try {
+		/*try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		System.out.println(this.getName() + " --> " + this.getContent());
 		canProduce = true; // 改变标志位，表示可以生产
 		super.notify();

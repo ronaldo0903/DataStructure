@@ -16,6 +16,7 @@ public class SingletonSerizableTest {
 
 	private static void TestSingletonSerizable(Class clazz) throws Exception {
 		assert clazz == LazySingletonV3.class || clazz == LazySingletonV4.class;
+		System.out.println("Testing Serizable behavior for class:" + clazz.getSimpleName());
 		Object instance1 = clazz.getDeclaredMethod("getInstance", null).invoke(clazz, null);
 		ObjectOutput out = null;
 		out = new ObjectOutputStream(new FileOutputStream("filename.ser"));
@@ -27,6 +28,7 @@ public class SingletonSerizableTest {
 		in.close();
 		System.out.println("instance1 hashCode=" + instance1.hashCode());
 		System.out.println("instance2 hashCode=" + instance2.hashCode());
+		System.out.println("=========================");
 	}
 
 }

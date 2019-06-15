@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 /*
-当有多线程正在操作ConcurrentLinkedQueue时，使用foreach遍历时不能保证获取到Queue的所有数据，因为遍历到next=null的节点是遍历
+当有多线程正在操作ConcurrentLinkedQueue时，使用foreach遍历时不能保证获取到Queue的所有数据，因为遍历到next=null的节点时遍历
 就会结束
  */
 public class ConcurrentLinkedQueueTest {

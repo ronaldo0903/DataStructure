@@ -12,6 +12,7 @@ public class SingletonBrokenByReflectionTest {
 
 	private static void TestSingletonAfterReflection(Class clazz) throws Exception {
 		assert clazz == LazySingletonV2.class || clazz == LazySingletonV3.class;
+        System.out.println("Testing Reflection behavior for class:" + clazz.getSimpleName());
 		Object instance1 = clazz.getDeclaredMethod("getInstance", null).invoke(clazz, null);
         //通过反射创建第二个实例
 		Object instance2 = null;
@@ -25,6 +26,7 @@ public class SingletonBrokenByReflectionTest {
         //检查两个实例的hash值
         System.out.println("Instance 1 hash:" + instance1.hashCode());
         System.out.println("Instance 2 hash:" + instance2.hashCode());
+        System.out.println("=================================");
 	}
 
 }
