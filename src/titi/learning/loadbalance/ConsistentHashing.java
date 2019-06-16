@@ -1,4 +1,4 @@
-package titi.learning.hash;
+package titi.learning.loadbalance;
 
 import java.util.SortedMap;
 import java.util.TreeMap;

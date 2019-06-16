@@ -24,8 +24,8 @@ public class SingletonBrokenByReflectionTest {
             e.printStackTrace();
         }
         //检查两个实例的hash值
-        System.out.println("Instance 1 hash:" + instance1.hashCode());
-        System.out.println("Instance 2 hash:" + instance2.hashCode());
+        System.out.println("Instance 1 loadbalance:" + instance1.hashCode());
+        System.out.println("Instance 2 loadbalance:" + instance2.hashCode());
         System.out.println("=================================");
 	}
 

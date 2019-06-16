@@ -1,4 +1,4 @@
-package titi.learning.hash;
+package titi.learning.loadbalance;
 
 import org.apache.commons.lang3.StringUtils;
 
